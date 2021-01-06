@@ -1,0 +1,26 @@
+type Student {
+    name: String
+    tests: [Test] @relation
+}
+
+type Project {
+    name: String
+    tests: [Test] @relation
+}
+
+type Test {
+    name: String
+    student: Student
+    project: Project
+}
+
+input TestFilters {
+  project: [ID]
+  student: [ID]
+}
+
+type Query {
+  projects: [Project]
+  tests(filter: TestFilters): [Test] @resolver(name: "get_tests", paginated: true)
+  getTestsByProject(id: ID): [Test] @resolver(name: "tests_by_project", paginated: true)
+}

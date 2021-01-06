@@ -1,0 +1,21 @@
+Query(
+  Lambda(
+    ["projectID", "size", "after", "before"],
+    Let(
+      {
+        project: Ref(Collection("Project"), Var("projectID")),
+        match: Match(Index("project_tests_by_project"), Var("project")),
+        data: If(
+          And(IsNull(Var("after")), IsNull(Var("before"))),
+          Paginate(Var("match"), { size: Var("size") }),
+          If(
+            IsNull(Var("before")),
+            Paginate(Var("match"), { after: Var("after"), size: Var("size") }),
+            Paginate(Var("match"), { before: Var("before"), size: Var("size") })
+          )
+        )
+      },
+      Map(Var("data"), Lambda("ref", Get(Var("ref"))))
+    )
+  )
+)

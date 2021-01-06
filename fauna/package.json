@@ -1,0 +1,16 @@
+{
+  "name": "fauna-writing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "generate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fakerator": "^0.3.2",
+    "faunadb": "^4.0.0"
+  }
+}
